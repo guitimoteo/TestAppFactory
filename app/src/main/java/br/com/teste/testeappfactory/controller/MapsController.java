@@ -1,13 +1,13 @@
 package br.com.teste.testeappfactory.controller;
 
-import android.app.Dialog;
+import android.app.AlertDialog;
 import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -18,7 +18,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.koushikdutta.ion.Ion;
-import com.koushikdutta.ion.gson.GsonObjectParser;
 
 import br.com.teste.testeappfactory.BuildConfig;
 import br.com.teste.testeappfactory.R;
@@ -140,16 +139,17 @@ public class MapsController extends FragmentActivity implements GpsStatus.Listen
 
     }
 
-    private void showMessage(Post post) {
+    public void showMessage(Post post) {
         final Post mPost = post;
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                new AlertDialog.Builder(MapsController.this)
+                new AlertDialog
+                        .Builder(MapsController.this)
                         .setCancelable(true)
                         .setTitle(mPost.getTitle())
-                        .setTitle(mPost.getId())
-                        .setMessage(mPost.getBody());
+                        .setMessage(mPost.getBody())
+                        .show();
             }
         });
     }
