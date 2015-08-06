@@ -11,6 +11,11 @@ android {
         versionCode 1
         versionName "1.0"
     }
+    dexOptions {
+        preDexLibraries = false
+        incremental true
+
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -19,8 +24,10 @@ android {
         }
 
         debug{
+            debuggable true
+            shrinkResources false
             minifyEnabled false
-            buildConfigField "String","URL","http://jsonplaceholder.typicode.com/"
+            buildConfigField "String","URL","\"http://jsonplaceholder.typicode.com/\""
         }
     }
 }

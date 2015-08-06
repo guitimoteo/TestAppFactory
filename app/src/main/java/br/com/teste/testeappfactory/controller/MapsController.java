@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,6 +26,7 @@ import br.com.teste.testeappfactory.model.Post;
 
 public class MapsController extends FragmentActivity implements GpsStatus.Listener, LocationListener {
 
+    private static final String TAG = "MapController";
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private LocationManager location;
     private Post post;
@@ -38,7 +40,7 @@ public class MapsController extends FragmentActivity implements GpsStatus.Listen
         setUpMapIfNeeded();
         post = new Post();
         location = (LocationManager)this.getSystemService(LOCATION_SERVICE);
-
+        location.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, this);
     }
 
     @Override
@@ -46,6 +48,8 @@ public class MapsController extends FragmentActivity implements GpsStatus.Listen
         super.onResume();
         setUpMapIfNeeded();
         getRestPost();
+        location = (LocationManager)this.getSystemService(LOCATION_SERVICE);
+        location.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 1, this);
     }
 
     /**
@@ -116,6 +120,7 @@ public class MapsController extends FragmentActivity implements GpsStatus.Listen
 
     @Override
     public void onProviderEnabled(String provider) {
+        Log.d(TAG, "provider enable: "+ provider);
 
     }
 
