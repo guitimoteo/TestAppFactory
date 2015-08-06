@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TesteAppFactory</string>
+    <string name="title_activity_maps">Teste <b>appfactory</b></string>
+</resources>
